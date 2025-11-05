@@ -116,7 +116,72 @@ A modern, full-stack Next.js application for managing ChatGPT conversations, cha
 
 ---
 
-## 📖 API Documentation
+## � Docker Setup
+
+For local testing and containerized deployment, this project includes Docker support with `Dockerfile` and `compose.yaml`.
+
+### Docker Prerequisites
+
+- Docker and Docker Compose installed on your system
+- Environment variables configured (see below)
+
+### Environment Configuration
+
+> **⚠️ SECURITY WARNING**  
+> **DO NOT COPY .env FILES DIRECTLY TO DOCKER CONTAINERS!**
+>
+> The current Dockerfile copies the .env file to the container, which is a security risk. Instead, use Docker environment variables or Docker secrets for production deployments. This setup is only for local testing purposes.
+
+### Running with Docker
+
+1. **Build and run the container**
+
+   ```bash
+   docker compose up --build
+   ```
+
+2. **Run in detached mode**
+
+   ```bash
+   docker compose up -d --build
+   ```
+
+3. **Stop the container**
+
+   ```bash
+   docker compose down
+   ```
+
+### Docker Configuration
+
+The setup includes:
+
+- **Multi-stage build** for optimized image size
+- **Node.js 22** with **pnpm** package manager
+- **Production environment** configuration
+- **Port 8100** exposed for the Next.js application
+
+### Environment Variables for Docker
+
+Make sure your `.env` file contains the required variables before building:
+
+```env
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/
+MONGODB_DB=chatdb
+OLLAMA_URL=http://host.docker.internal:11434
+LMSTUDIO_URL=http://host.docker.internal:1234
+```
+
+**Note:** Use `host.docker.internal` instead of `localhost` when running in Docker to access services on your host machine.
+
+### Docker Files
+
+- `Dockerfile` - Multi-stage build configuration
+- `compose.yaml` - Docker Compose service definition
+
+---
+
+## �📖 API Documentation
 
 ### 🔹 Conversations API
 

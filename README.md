@@ -18,12 +18,14 @@ A modern, full-stack Next.js application for managing ChatGPT conversations, cha
 ## ✨ Features
 
 ### 📤 **ChatGPT Data Upload**
+
 - Upload exported ChatGPT conversations.json files directly to MongoDB
 - Automatic data cleaning and deduplication
 - Track insertion and modification stats
 - Drag-and-drop interface
 
 ### 💬 **Local LLM Chat**
+
 - **Ollama Integration** - Chat with local Ollama models
 - **LM Studio Integration** - Connect to LM Studio server
 - Real-time streaming responses
@@ -32,6 +34,7 @@ A modern, full-stack Next.js application for managing ChatGPT conversations, cha
 - Model selection and management
 
 ### 🔍 **Powerful Search**
+
 - Full-text search across all conversations
 - Search by message content
 - Filter by source (ChatGPT, Ollama, LM Studio)
@@ -39,6 +42,7 @@ A modern, full-stack Next.js application for managing ChatGPT conversations, cha
 - Click to view full conversations
 
 ### 📚 **Conversation Manager**
+
 - Browse all stored conversations
 - Filter and search by title or ID
 - View detailed conversation metadata
@@ -47,6 +51,7 @@ A modern, full-stack Next.js application for managing ChatGPT conversations, cha
 - Dark mode support
 
 ### 🎨 **Modern UI/UX**
+
 - Clean, responsive design
 - Dark mode toggle
 - Smooth animations and transitions
@@ -67,12 +72,14 @@ A modern, full-stack Next.js application for managing ChatGPT conversations, cha
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/yourusername/chatdb.git
    cd chatdb
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    # or
@@ -82,8 +89,9 @@ A modern, full-stack Next.js application for managing ChatGPT conversations, cha
    ```
 
 3. **Set up environment variables**
-   
+
    Create a `.env.local` file in the root directory:
+
    ```env
    # MongoDB Atlas Connection
    MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/
@@ -97,12 +105,13 @@ A modern, full-stack Next.js application for managing ChatGPT conversations, cha
    ```
 
 4. **Run the development server**
+
    ```bash
    npm run dev
    ```
 
 5. **Open your browser**
-   
+
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ---
@@ -112,9 +121,11 @@ A modern, full-stack Next.js application for managing ChatGPT conversations, cha
 ### 🔹 Conversations API
 
 #### **GET** `/api/conversations`
+
 Retrieve all conversations from the database.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -134,9 +145,11 @@ Retrieve all conversations from the database.
 ```
 
 #### **GET** `/api/conversations/[id]`
+
 Get a specific conversation by ID.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -164,9 +177,11 @@ Get a specific conversation by ID.
 ### 🔹 Upload API
 
 #### **POST** `/api/upload`
+
 Upload ChatGPT conversations to MongoDB.
 
 **Request Body:**
+
 ```json
 {
   "conversations": [...],
@@ -175,6 +190,7 @@ Upload ChatGPT conversations to MongoDB.
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -190,17 +206,20 @@ Upload ChatGPT conversations to MongoDB.
 ### 🔹 Search API
 
 #### **POST** `/api/search`
+
 Search through conversation messages.
 
 **Request Body:**
+
 ```json
 {
   "query": "search term",
-  "collection": "all"  // or "chatgpt", "ollama", "lmstudio"
+  "collection": "all" // or "chatgpt", "ollama", "lmstudio"
 }
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -223,19 +242,20 @@ Search through conversation messages.
 ### 🔹 Ollama Chat API
 
 #### **POST** `/api/chat`
+
 Send messages to Ollama models.
 
 **Request Body:**
+
 ```json
 {
-  "messages": [
-    { "role": "user", "content": "Hello!" }
-  ],
+  "messages": [{ "role": "user", "content": "Hello!" }],
   "model": "llama2"
 }
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -254,9 +274,11 @@ Send messages to Ollama models.
 ```
 
 #### **GET** `/api/chat/models`
+
 List available Ollama models.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -271,9 +293,11 @@ List available Ollama models.
 ```
 
 #### **POST** `/api/chat/save`
+
 Save an Ollama conversation to the database.
 
 **Request Body:**
+
 ```json
 {
   "title": "My Chat",
@@ -287,22 +311,24 @@ Save an Ollama conversation to the database.
 ### 🔹 LM Studio Chat API
 
 #### **POST** `/api/lmstudio/chat`
+
 Send messages to LM Studio models.
 
 **Request Body:**
+
 ```json
 {
-  "messages": [
-    { "role": "user", "content": "Hello!" }
-  ],
+  "messages": [{ "role": "user", "content": "Hello!" }],
   "model": "local-model"
 }
 ```
 
 #### **GET** `/api/lmstudio/models`
+
 List available LM Studio models.
 
 #### **POST** `/api/lmstudio/save`
+
 Save an LM Studio conversation to the database.
 
 ---
@@ -366,6 +392,7 @@ chatdb/
 ### 2️⃣ **Chat with Local LLMs**
 
 **Ollama:**
+
 1. Install and run Ollama locally
 2. Pull a model: `ollama pull llama2`
 3. Navigate to `/chat` in the app
@@ -373,6 +400,7 @@ chatdb/
 5. Save conversations to database
 
 **LM Studio:**
+
 1. Install and run LM Studio
 2. Load a model and start the server
 3. Navigate to `/lmstudio` in the app
@@ -402,12 +430,12 @@ The application automatically detects and respects your system's dark mode prefe
 
 ## 🔒 Environment Variables
 
-| Variable | Description | Required | Default |
-|----------|-------------|----------|---------|
-| `MONGODB_URI` | MongoDB connection string | ✅ Yes | - |
-| `MONGODB_DB` | Database name | ✅ Yes | - |
-| `OLLAMA_URL` | Ollama API endpoint | ❌ No | `http://localhost:11434` |
-| `LMSTUDIO_URL` | LM Studio API endpoint | ❌ No | `http://localhost:1234` |
+| Variable       | Description               | Required | Default                  |
+| -------------- | ------------------------- | -------- | ------------------------ |
+| `MONGODB_URI`  | MongoDB connection string | ✅ Yes   | -                        |
+| `MONGODB_DB`   | Database name             | ✅ Yes   | -                        |
+| `OLLAMA_URL`   | Ollama API endpoint       | ❌ No    | `http://localhost:11434` |
+| `LMSTUDIO_URL` | LM Studio API endpoint    | ❌ No    | `http://localhost:1234`  |
 
 ---
 
@@ -439,7 +467,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 <div align="center">
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by [dedkola](https://github.com/dedkola)
 
 ⭐ Star this repo if you find it helpful!
 
